@@ -6,17 +6,18 @@ let sketchMode = 'rainbow'
 createGrid(16, content);
 
 let gridButton = document.getElementById('grid-size');
-
 gridButton.addEventListener('input', () => {
     let newValue = gridButton.value;
     let target = document.querySelector('.grid-size-value');
     target.textContent = 'Grid Size: ' + ('00' + newValue).slice(-2);
 });
 // on click recreate the grid with a new size
-gridButton.addEventListener('click', function () {
+gridButton.addEventListener('click', resizeGrid)
+gridButton.addEventListener('touchend', resizeGrid)
+function resizeGrid() {
     let gridSize = gridButton.value;
     createGrid(gridSize, content);
-});
+}
 
 
 
@@ -57,28 +58,36 @@ sketchModeSelector.forEach((input) => {
 function gridPaint(nodes) {
     nodes.forEach((div) => {
         div.addEventListener('mouseover', () => {
-            if (div.className !='painted' && sketchMode == 'rainbow'){
-                div.style.background = rainbow();
-                div.className = 'painted';
-            }
-            else if (sketchMode == 'black') {
-                div.style.background = '#000'
-            }
-            else if (div.className !='painted-gray' && sketchMode == 'grayscale') {
-                div.style.background = '#CCC'
-                div.className = 'painted-gray';
-            }
-            else if (sketchMode == 'eraser') {
-                div.style.background = '#FFF'
-                div.className = 'erased'
-            }
-            else {
-                currentColor = div.style.background;
-                div.style.background = darken(currentColor);
-            }
-            
+            let node = div;
+            changeColor(node);
         });
+        div.addEventListener('touchstart', () => {
+            let node = div;
+            changeColor(node);
+        })
     });
+}
+
+function changeColor(node) {
+    if (node.className !='painted' && sketchMode == 'rainbow'){
+        node.style.background = rainbow();
+        node.className = 'painted';
+    }
+    else if (sketchMode == 'black') {
+        node.style.background = '#000'
+    }
+    else if (node.className !='painted-gray' && sketchMode == 'grayscale') {
+        node.style.background = '#CCC'
+        node.className = 'painted-gray';
+    }
+    else if (sketchMode == 'eraser') {
+        node.style.background = '#FFF'
+        node.className = 'erased'
+    }
+    else {
+        currentColor = node.style.background;
+        node.style.background = darken(currentColor);
+    }
 }
 
 // Pick a random color value
