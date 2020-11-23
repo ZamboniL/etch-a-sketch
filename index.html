@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-Sketch</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <span class="title">Etch-a-Sketch</span>
+            <span class="title-mode">Sketch Mode:</span>
+            
+            <!--RADIO BUTTONS-->
+            <form id="sketchselect">
+                <input type="radio" name="SketchMode" id="rainbow" value="rainbow" tabindex="0" checked>
+                <label for="rainbow">Rainbow</label>
+                <input type="radio" name="SketchMode" id="black" value="black" tabindex="1">
+                <label for="black">Black</label>
+                <input type="radio" name="SketchMode" id="grayscale" value="grayscale" tabindex="2">                    <label for="grayscale">Grayscale</label>
+                <input type="radio" name="SketchMode" id="eraser" value="eraser" tabindex="3">
+                <label for="eraser">Eraser</label>
+            </form>
+            <!--GRID SIZE SLIDER-->
+            <div class="grid-size-slider">
+                <label class="grid-size-value" for="grid-size">Grid Size: 16</label>
+                <input type="range" min="2" max="50" value="16" name="grid-size" id="grid-size">    
+            </div>
+
+        </nav>
+        <!--GRID-->
+        <main class="content">
+
+        </main>
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
